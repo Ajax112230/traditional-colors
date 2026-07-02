@@ -116,6 +116,233 @@ body {
   pointer-events: none;
 }
 
+/* ─── 模式切换 ────────────────────────────────── */
+.mode-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 50px;
+  padding: 4px;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.mode-btn.active {
+  background: rgba(201,169,110,0.15);
+  color: var(--gold-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ─── 姓色匹配 - 输入区 ──────────────────────── */
+#name-screen {
+  display: none;
+  text-align: center;
+  padding: 0 0 32px;
+}
+
+#name-screen.active {
+  display: block;
+}
+
+.name-input-row {
+  display: flex;
+  max-width: 360px;
+  margin: 0 auto 12px;
+  border: 1px solid rgba(201,169,110,0.35);
+  border-radius: 50px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.name-input-row:focus-within {
+  border-color: rgba(201,169,110,0.7);
+  box-shadow: 0 0 0 4px rgba(201,169,110,0.08);
+}
+
+.name-input-row input {
+  flex: 1;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.04);
+  border: none;
+  color: var(--text);
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+}
+
+.name-input-row input::placeholder {
+  color: var(--text-muted);
+}
+
+.name-input-row button {
+  padding: 14px 24px;
+  background: rgba(201,169,110,0.15);
+  border: none;
+  border-left: 1px solid rgba(201,169,110,0.2);
+  color: var(--gold-light);
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.name-input-row button:hover {
+  background: rgba(201,169,110,0.28);
+}
+
+.name-input-row button:active {
+  background: rgba(201,169,110,0.35);
+}
+
+.name-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.name-hint.shake {
+  animation: shake 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ─── 姓色匹配 - 结果区 ──────────────────────── */
+#name-result {
+  display: none;
+  text-align: center;
+  padding: 0 0 48px;
+}
+
+#name-result.visible {
+  display: block;
+  animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 圆形绣绷色卡 */
+.embroidery-card {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  position: relative;
+  box-shadow:
+    0 0 0 6px #3a2e1a,
+    0 0 0 10px #1a140a,
+    0 0 0 14px rgba(201,169,110,0.3),
+    0 0 60px var(--ink-glow, rgba(201,169,110,0.3)),
+    inset 0 0 30px rgba(0,0,0,0.3);
+  background: var(--ink-color, #c9a96e);
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  cursor: default;
+}
+
+.embroidery-card:hover {
+  transform: scale(1.04);
+}
+
+/* 丝绸纹理 */
+.embroidery-card::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 2; border-radius: 50%;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(15deg, transparent 0, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 2.4px),
+    repeating-linear-gradient(-12deg, transparent 0, transparent 4px, rgba(255,255,255,0.03) 4px, rgba(255,255,255,0.03) 4.3px),
+    linear-gradient(140deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 18%, transparent 40%, transparent 75%, rgba(255,255,255,0.03) 100%),
+    radial-gradient(ellipse 45% 35% at 35% 25%, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+
+/* 织物纹理 */
+.embroidery-card::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 3; border-radius: 50%;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 0.6px, rgba(255,255,255,0.012) 0.6px, rgba(255,255,255,0.012) 1px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 0.6px, rgba(255,255,255,0.008) 0.6px, rgba(255,255,255,0.008) 1px);
+}
+
+.name-result-name {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.name-result-values {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.name-result-poem {
+  max-width: 420px;
+  margin: 0 auto 24px;
+  padding: 20px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  border-left: 2px solid rgba(201,169,110,0.3);
+}
+
+.name-result-poem .poem-line {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.name-result-poem .poem-attr {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: right;
+}
+
+.name-retry-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: rgba(201,169,110,0.12);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 50px;
+  color: var(--gold-light);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.name-retry-btn:hover {
+  background: rgba(201,169,110,0.22);
+  border-color: rgba(201,169,110,0.5);
+}
+
+/* 响应式 */
+@media (max-width: 480px) {
+  .embroidery-card { width: 180px; height: 180px; }
+  .name-result-name { font-size: 28px; }
+}
+
 /* ─── 分类筛选 ────────────────────────────────── */
 .categories {
   display: flex;
@@ -638,12 +865,40 @@ body {
   <header class="hero">
     <h1>寻 色</h1>
     <p class="subtitle">一色一诗 · 中国传统色百科</p>
-    <div class="search-wrap">
+
+    <!-- 模式切换 -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="modeBrowse" onclick="switchMode('browse')">🎨 色彩浏览</button>
+      <button class="mode-btn" id="modeName" onclick="switchMode('name')">🔮 姓色匹配</button>
+    </div>
+
+    <div class="search-wrap" id="searchWrap">
       <input type="text" id="searchInput" placeholder="搜索颜色名，如「胭脂」「天青」..." autocomplete="off">
       <span class="search-icon">🔍</span>
     </div>
     <div class="categories" id="categoryList"></div>
   </header>
+
+  <!-- 姓色匹配 > 输入区 -->
+  <div id="name-screen">
+    <div class="name-input-row">
+      <input type="text" id="nameInput" placeholder="输入你的姓名或昵称..." autocomplete="off">
+      <button onclick="searchName()">寻色</button>
+    </div>
+    <p class="name-hint">↵ 输入姓名，探寻属于你的中国传统色</p>
+  </div>
+
+  <!-- 姓色匹配 > 结果区 -->
+  <div id="name-result">
+    <div class="embroidery-card" id="embroideryCard"></div>
+    <h2 class="name-result-name" id="nameColorName"></h2>
+    <div class="name-result-values" id="nameColorValues"></div>
+    <div class="name-result-poem">
+      <div class="poem-line" id="namePoemText"></div>
+      <div class="poem-attr" id="namePoemAttr"></div>
+    </div>
+    <button class="name-retry-btn" onclick="retryName()">🔄 再探一色</button>
+  </div>
 
   <!-- 颜色网格 -->
   <div class="color-grid" id="colorGrid"></div>
@@ -795,6 +1050,105 @@ const CATEGORIES = ['全部', '赤', '橙', '黄', '绿', '青', '蓝', '紫', '
 let activeCategory = '全部';
 let searchQuery = '';
 let palette = []; // 最多 5 色
+let currentMode = 'browse';
+
+// ─── 模式切换 ────────────────────────────────────
+function switchMode(mode) {
+  currentMode = mode;
+  document.getElementById('modeBrowse').classList.toggle('active', mode === 'browse');
+  document.getElementById('modeName').classList.toggle('active', mode === 'name');
+
+  document.getElementById('searchWrap').style.display = mode === 'browse' ? '' : 'none';
+  document.getElementById('categoryList').style.display = mode === 'browse' ? '' : 'none';
+  document.getElementById('colorGrid').style.display = mode === 'browse' ? '' : 'none';
+
+  document.getElementById('name-screen').classList.toggle('active', mode === 'name');
+
+  if (mode === 'name') {
+    document.getElementById('nameInput').focus();
+    // 如果已经有结果，不隐藏
+  } else {
+    renderGrid();
+  }
+
+  // footer 在浏览模式显示
+  document.querySelector('.footer').style.display = mode === 'browse' ? '' : 'none';
+}
+
+// ─── 姓色匹配 ────────────────────────────────────
+function hashName(s) {
+  var h = 5381;
+  for (var i = 0; i < s.length; i++) { h = ((h<<5)+h+s.charCodeAt(i)) & 0x7fffffff; }
+  return COLORS[h % COLORS.length];
+}
+
+function searchName() {
+  var name = document.getElementById('nameInput').value.trim();
+  if (!name) {
+    var hint = document.querySelector('.name-hint');
+    hint.classList.add('shake');
+    setTimeout(function(){ hint.classList.remove('shake'); }, 500);
+    return;
+  }
+  var c = hashName(name);
+  showNameResult(c);
+}
+
+function showNameResult(c) {
+  var card = document.getElementById('embroideryCard');
+  card.style.setProperty('--ink-color', c.hex);
+  card.style.setProperty('--ink-glow', 'rgba('+c.r+','+c.g+','+c.b+',0.35)');
+  card.style.background = c.hex;
+  card.style.backgroundImage = 'none';
+
+  document.getElementById('nameColorName').textContent = c.name;
+
+  var vals = document.getElementById('nameColorValues');
+  vals.innerHTML = `
+    <span class="value-chip" onclick="copyValue('${c.hex}', this)">
+      <span class="val">HEX ${c.hex}</span><span class="copied">✓ 已复制</span>
+    </span>
+    <span class="value-chip" onclick="copyValue('rgb(${c.r}, ${c.g}, ${c.b})', this)">
+      <span class="val">RGB ${c.r}, ${c.g}, ${c.b}</span><span class="copied">✓ 已复制</span>
+    </span>
+  `;
+
+  document.getElementById('namePoemText').textContent = '「'+c.poem+'」';
+
+  var parts = [c.poet];
+  if (c.dynasty && c.dynasty !== '—') parts.push(c.dynasty);
+  if (c.source && c.source !== '—') parts.push('《'+c.source+'》');
+  document.getElementById('namePoemAttr').textContent = '—— ' + parts.filter(Boolean).join(' · ');
+
+  document.getElementById('name-screen').classList.remove('active');
+  document.getElementById('name-result').classList.add('visible');
+
+  // 弹入动画
+  var crd = document.getElementById('embroideryCard');
+  crd.style.transition = 'none';
+  crd.style.transform = 'scale(0.3)';
+  crd.style.opacity = '0';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      crd.style.transition = 'transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.5s';
+      crd.style.transform = 'scale(1)';
+      crd.style.opacity = '1';
+    });
+  });
+}
+
+function retryName() {
+  document.getElementById('name-result').classList.remove('visible');
+  document.getElementById('name-screen').classList.add('active');
+  document.getElementById('nameInput').value = '';
+  document.getElementById('nameInput').focus();
+}
+
+// 姓名输入框回车触发
+document.addEventListener('DOMContentLoaded', function() {
+  var ni = document.getElementById('nameInput');
+  if (ni) ni.addEventListener('keydown', function(e) { if (e.key === 'Enter') searchName(); });
+});
 
 // ─── 粒子背景 ────────────────────────────────────
 (function initParticles() {
