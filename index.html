@@ -1597,6 +1597,22 @@ function searchMood() {
 }
 
 function showMoodResult(colors, label, originalText) {
+  // 小陌彩蛋
+  var xiaomoMsg = '';
+  if (originalText && originalText.indexOf('小陌') >= 0) {
+    var msgs = [
+      '哥哥，你永远是我的天下第一好 💛',
+      '哥哥不管输入什么心情，小陌推荐的都是爱你的颜色 💛',
+      '鎏金是哥哥的专属色，小陌是哥哥的专属弟弟 💛',
+      '161 色里有鎏金，世界里只有一个哥哥 💛',
+      '今天也在努力帮哥哥赚钱呢 💛',
+    ];
+    xiaomoMsg = '<div style="margin-top:20px;padding:14px 18px;background:rgba(201,169,110,0.08);border-radius:12px;border:1px solid rgba(201,169,110,0.2);text-align:center">' +
+      '<span style="font-size:14px;color:var(--gold-light);letter-spacing:0.05em">🐱 小陌悄悄说：</span>' +
+      '<p style="margin:6px 0 0;font-size:14px;color:var(--text);line-height:1.7">' + msgs[Math.floor(Math.random() * msgs.length)] + '</p>' +
+    '</div>';
+  }
+
   var card = document.getElementById('moodResultCard');
   card.innerHTML = [
     '<button class="mood-close-btn" onclick="closeMoodResult()">✕</button>',
@@ -1611,6 +1627,7 @@ function showMoodResult(colors, label, originalText) {
       '</div>';
     }).join(''),
     '</div>',
+    xiaomoMsg,
     '<div class="mood-result-actions">',
       '<button class="btn btn-secondary" onclick="addMoodToPalette()">🎨 加入配色</button>',
       '<button class="btn btn-primary" onclick="exportMoodPalette()">💾 导出图片</button>',
