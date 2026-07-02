@@ -876,6 +876,8 @@ body {
 </head>
 <body>
 
+<img id="name-bg-img" src="assets/11.jpg" alt="" style="position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:0;display:none;">
+
 <div id="galaxy-bg"></div>
 
 <div class="app">
@@ -1086,10 +1088,9 @@ function switchMode(mode) {
     document.getElementById('nameInput').focus();
     // 如果已经有结果，不隐藏
   } else {
-    // 恢复
-    document.body.style.background = document.body._savedBg || '';
-    var gbg = document.getElementById('galaxy-bg');
-    if (gbg) gbg.style.display = '';
+    // 恢复星空
+    document.getElementById('galaxy-bg').style.display = '';
+    document.getElementById('name-bg-img').style.display = 'none';
     renderGrid();
   }
 
@@ -1117,15 +1118,9 @@ function searchName() {
 }
 
 function showNameResult(c) {
-  // 隐藏 WebGL，body 直接贴原图
-  var gbg = document.getElementById('galaxy-bg');
-  if (gbg) gbg.style.display = 'none';
-  var savedBodyBg = document.body.style.background || '';
-  document.body.style.background = 'url(assets/11.jpg) center/cover no-repeat fixed';
-  document.body._savedBg = savedBodyBg;
-
-  var result = document.getElementById('name-result');
-  result.style.background = 'none';
+  // 背景图显示，星空隐藏
+  document.getElementById('galaxy-bg').style.display = 'none';
+  document.getElementById('name-bg-img').style.display = 'block';
 
   var card = document.getElementById('embroideryCard');
   card.style.setProperty('--ink-color', c.hex);
@@ -1170,10 +1165,9 @@ function showNameResult(c) {
 }
 
 function retryName() {
-  // 恢复
-  document.body.style.background = document.body._savedBg || '';
-  var gbg = document.getElementById('galaxy-bg');
-  if (gbg) gbg.style.display = '';
+  // 恢复星空
+  document.getElementById('galaxy-bg').style.display = '';
+  document.getElementById('name-bg-img').style.display = 'none';
 
   document.getElementById('name-result').classList.remove('visible');
   document.getElementById('name-screen').classList.add('active');
