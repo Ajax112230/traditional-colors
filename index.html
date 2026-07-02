@@ -36,12 +36,18 @@ body {
 }
 
 /* ─── Canvas 背景 ─────────────────────────────── */
-#bg-canvas {
+#galaxy-bg {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   pointer-events: none;
   z-index: 0;
+}
+#galaxy-bg canvas {
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
 }
 
 /* ─── 主容器 ──────────────────────────────────── */
@@ -881,7 +887,7 @@ body {
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
+<div id="galaxy-bg"></div>
 
 <div class="app">
   <!-- Hero -->
@@ -1173,42 +1179,23 @@ document.addEventListener('DOMContentLoaded', function() {
   if (ni) ni.addEventListener('keydown', function(e) { if (e.key === 'Enter') searchName(); });
 });
 
-// ─── 粒子背景 ────────────────────────────────────
-(function initParticles() {
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-  const COUNT = 60;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  for (let i = 0; i < COUNT; i++) {
-    particles.push({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-      size: Math.random() * 1.8 + 0.4,
-      opacity: Math.random() * 0.4 + 0.1,
+// ─── WebGL 星空背景 ──────────────────────────────
+var _galaxy;
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof initGalaxy === 'function') {
+    _galaxy = initGalaxy(document.getElementById('galaxy-bg'), {
+      hueShift: 0.12,
+      density: 1.0,
+      glowIntensity: 1.0,
+      mouseRepulsion: true,
+      repulsionStrength: 0.3,
+      starSize: 1.0,
+      flareIntensity: 0.5,
+      nebulaIntensity: 0.35,
+      brightness: 1.0,
     });
   }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    for (const p of particles) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10;
-      if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
-      ctx.fillStyle = `rgba(201,169,110,${p.opacity})`;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
+});
 
 // ─── 渲染 ────────────────────────────────────────
 function getFilteredColors() {
@@ -1539,5 +1526,6 @@ renderCategories();
 renderGrid();
 </script>
 
+<script src="js/galaxy.js"></script>
 </body>
 </html>
