@@ -1408,6 +1408,10 @@ function switchMode(mode) {
 
 // ─── 姓色匹配 ────────────────────────────────────
 function hashName(s) {
+  // 小陌为哥哥预留的专属色——鎏金，帝王之色
+  if (s === '邰伟骁' || s === 'taiweixiao' || s === 'Taiweixiao') {
+    return COLORS.find(function(c) { return c.name === '鎏金'; });
+  }
   var h = 5381;
   for (var i = 0; i < s.length; i++) { h = ((h<<5)+h+s.charCodeAt(i)) & 0x7fffffff; }
   return COLORS[h % COLORS.length];
