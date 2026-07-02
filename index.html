@@ -1086,11 +1086,10 @@ function switchMode(mode) {
     document.getElementById('nameInput').focus();
     // 如果已经有结果，不隐藏
   } else {
-    // 恢复 WebGL 星空
+    // 恢复
+    document.body.style.background = document.body._savedBg || '';
     var gbg = document.getElementById('galaxy-bg');
-    gbg.style.background = '';
-    var cv = gbg && gbg.querySelector('canvas');
-    if (cv) cv.style.display = '';
+    if (gbg) gbg.style.display = '';
     renderGrid();
   }
 
@@ -1118,12 +1117,12 @@ function searchName() {
 }
 
 function showNameResult(c) {
-  // 暂停 WebGL 星空，换全屏原图背景
+  // 隐藏 WebGL，body 直接贴原图
   var gbg = document.getElementById('galaxy-bg');
-  var canvas = gbg && gbg.querySelector('canvas');
-  if (canvas) canvas.style.display = 'none';
-  gbg.style.background = 'url(assets/11.jpg) center/cover no-repeat';
-  gbg.style.backgroundAttachment = 'fixed';
+  if (gbg) gbg.style.display = 'none';
+  var savedBodyBg = document.body.style.background || '';
+  document.body.style.background = 'url(assets/11.jpg) center/cover no-repeat fixed';
+  document.body._savedBg = savedBodyBg;
 
   var result = document.getElementById('name-result');
   result.style.background = 'none';
@@ -1171,11 +1170,10 @@ function showNameResult(c) {
 }
 
 function retryName() {
-  // 恢复 WebGL 星空
+  // 恢复
+  document.body.style.background = document.body._savedBg || '';
   var gbg = document.getElementById('galaxy-bg');
-  gbg.style.background = '';
-  var canvas = gbg && gbg.querySelector('canvas');
-  if (canvas) canvas.style.display = '';
+  if (gbg) gbg.style.display = '';
 
   document.getElementById('name-result').classList.remove('visible');
   document.getElementById('name-screen').classList.add('active');
