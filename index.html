@@ -131,7 +131,7 @@ body {
   background: rgba(255,255,255,0.03);
   border-radius: 50px;
   padding: 4px;
-  max-width: 280px;
+  max-width: 380px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -355,6 +355,208 @@ body {
 .name-retry-btn:hover {
   background: rgba(201,169,110,0.22);
   border-color: rgba(201,169,110,0.5);
+}
+
+/* ─── 心情配色 - 输入区 ──────────────────────── */
+#mood-screen {
+  display: none;
+  text-align: center;
+  padding: 0 0 32px;
+}
+
+#mood-screen.active {
+  display: block;
+}
+
+.mood-input-wrap {
+  max-width: 420px;
+  margin: 0 auto 12px;
+}
+
+.mood-input-wrap textarea {
+  width: 100%;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  resize: none;
+  line-height: 1.6;
+  height: 90px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.mood-input-wrap textarea:focus {
+  border-color: rgba(201,169,110,0.4);
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.06);
+}
+
+.mood-input-wrap textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.mood-submit-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 12px 36px;
+  background: rgba(201,169,110,0.15);
+  border: 1px solid rgba(201,169,110,0.35);
+  border-radius: 50px;
+  color: var(--gold-light);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.mood-submit-btn:hover {
+  background: rgba(201,169,110,0.25);
+  border-color: rgba(201,169,110,0.5);
+}
+
+/* ─── 心情配色 - 玻璃弹出结果 ────────────────── */
+#mood-result-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+#mood-result-overlay.show {
+  display: flex;
+}
+
+.mood-result-card {
+  background: rgba(20,20,20,0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 20px;
+  padding: 36px 32px 28px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,169,110,0.1) inset;
+  animation: slideUp 0.45s cubic-bezier(0.16,1,0.3,1) both;
+  position: relative;
+}
+
+.mood-result-card .mood-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+
+.mood-result-card .mood-title {
+  font-family: 'ZCOOL QingKe HuangYou', serif;
+  font-size: 28px;
+  color: var(--gold-light);
+  margin-bottom: 28px;
+}
+
+.mood-swatches {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.mood-swatch {
+  width: 80px;
+  text-align: center;
+}
+
+.mood-swatch .swatch-dot {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  border: 3px solid rgba(201,169,110,0.3);
+  box-shadow: 0 0 24px var(--swatch-glow, rgba(201,169,110,0.2));
+  transition: transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.mood-swatch .swatch-dot::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(ellipse 40% 30% at 35% 25%, rgba(255,255,255,0.15) 0%, transparent 60%);
+}
+
+.mood-swatch .swatch-dot:hover {
+  transform: scale(1.1);
+}
+
+.mood-swatch .swatch-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.mood-swatch .swatch-hex {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.mood-result-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mood-result-actions .btn {
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.mood-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.mood-close-btn:hover {
+  background: rgba(255,255,255,0.14);
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .mood-swatch { width: 64px; }
+  .mood-swatch .swatch-dot { width: 56px; height: 56px; }
+  .mood-result-card { padding: 28px 20px 22px; }
 }
 
 /* 响应式 */
@@ -895,6 +1097,7 @@ body {
     <div class="mode-toggle">
       <button class="mode-btn active" id="modeBrowse" onclick="switchMode('browse')">🎨 色彩浏览</button>
       <button class="mode-btn" id="modeName" onclick="switchMode('name')">🔮 姓色匹配</button>
+      <button class="mode-btn" id="modeMood" onclick="switchMode('mood')">💭 心情配色</button>
     </div>
 
     <div class="search-wrap" id="searchWrap">
@@ -913,6 +1116,14 @@ body {
     <p class="name-hint">↵ 输入姓名，探寻属于你的中国传统色</p>
   </div>
 
+  <!-- 心情配色 > 输入区 -->
+  <div id="mood-screen">
+    <div class="mood-input-wrap">
+      <textarea id="moodInput" placeholder="描述你的心情，比如：今天下着小雨，有点淡淡的忧伤，想一个人安静地待着..." autocomplete="off"></textarea>
+    </div>
+    <button class="mood-submit-btn" onclick="searchMood()">✨ 生成配色</button>
+  </div>
+
   <!-- 姓色匹配 > 结果区 -->
   <div id="name-result">
     <div class="embroidery-card" id="embroideryCard"></div>
@@ -929,6 +1140,11 @@ body {
 
   <!-- 颜色网格 -->
   <div class="color-grid" id="colorGrid"></div>
+
+  <!-- 心情配色 > 玻璃弹出结果 -->
+  <div id="mood-result-overlay" onclick="if(event.target===this)closeMoodResult()">
+    <div class="mood-result-card" id="moodResultCard"></div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1084,16 +1300,23 @@ function switchMode(mode) {
   currentMode = mode;
   document.getElementById('modeBrowse').classList.toggle('active', mode === 'browse');
   document.getElementById('modeName').classList.toggle('active', mode === 'name');
+  document.getElementById('modeMood').classList.toggle('active', mode === 'mood');
 
   document.getElementById('searchWrap').style.display = mode === 'browse' ? '' : 'none';
   document.getElementById('categoryList').style.display = mode === 'browse' ? '' : 'none';
   document.getElementById('colorGrid').style.display = mode === 'browse' ? '' : 'none';
 
   document.getElementById('name-screen').classList.toggle('active', mode === 'name');
+  document.getElementById('mood-screen').classList.toggle('active', mode === 'mood');
+
+  // 显示/隐藏姓色结果
+  var nr = document.getElementById('name-result');
+  if (mode !== 'name') { nr.classList.remove('visible'); nr.style.backgroundImage = ''; }
 
   if (mode === 'name') {
     document.getElementById('nameInput').focus();
-    // 如果已经有结果，不隐藏
+  } else if (mode === 'mood') {
+    document.getElementById('moodInput').focus();
   } else {
     // 恢复星空
     document.getElementById('galaxy-bg').style.display = '';
@@ -1103,6 +1326,8 @@ function switchMode(mode) {
 
   // footer 在浏览模式显示
   document.querySelector('.footer').style.display = mode === 'browse' ? '' : 'none';
+  // 关闭心情弹窗
+  closeMoodResult();
 }
 
 // ─── 姓色匹配 ────────────────────────────────────
@@ -1181,6 +1406,192 @@ function retryName() {
   document.getElementById('nameInput').value = '';
   document.getElementById('nameInput').focus();
 }
+
+// ─── 心情配色引擎 ─────────────────────────────────
+
+// 心情关键词 → 颜色的映射
+// 格式：{ pattern: /正则/, colors: ['色名1','色名2',...], label: '标签' }
+var MOOD_MAP = [
+  // 忧伤、忧郁
+  { re: /(忧伤|悲伤|难过|伤心|忧郁|失落|难过|想哭|难过|黯然|惆怅|伤感|哀伤|悲|愁|泪|丧|闷|灰)/, colors: ['黛紫','靛蓝','墨色','铅灰','鸦青','琉璃','玄青'], label: '淡淡忧伤' },
+  // 安静、平和
+  { re: /(安静|宁静|平和|平静|安详|静谧|静|安然|安逸|闲适|放空|发呆|禅|寂|幽)/, colors: ['月白','霜白','素色','秘色','茶绿','竹青','豆绿','天青'], label: '静谧平和' },
+  // 快乐、阳光
+  { re: /(快乐|开心|高兴|愉快|幸福|喜悦|欢喜|乐乐|乐|笑|甜|喜|雀跃|阳光|明亮|灿烂|欢)/, colors: ['鹅黄','明黄','杏黄','桃红','石榴红','橘红','金黄','胭脂'], label: '明媚欢快' },
+  // 温暖、治愈
+  { re: /(温暖|温馨|治愈|柔和|柔软|暖暖|暖|柔情|温柔|拥抱|依靠|安慰|舒服|安心)/, colors: ['杏黄','鹅黄','象牙白','檀色','琥珀','秋香','藕荷','茶色'], label: '温柔治愈' },
+  // 热烈、激情
+  { re: /(热烈|激情|火热|热情|燃烧|热血|激动|躁动|炙热|奔放|狂野|烈|火|燃)/, colors: ['朱砂','赤金','石榴红','牡丹红','丹霞红','殷红','琥珀','藤黄'], label: '热烈如火' },
+  // 清新、自然
+  { re: /(清新|自然|清爽|纯净|简单|干净|淡雅|素雅|清雅|微风|清晨|雨后|春天|花香|草|风|雨|露)/, colors: ['葱绿','豆绿','艾绿','天青','柳绿','碧色','石绿','霁青'], label: '清新自然' },
+  // 浪漫、甜蜜
+  { re: /(浪漫|甜蜜|爱情|恋爱|心动|喜欢|美好|粉红|甜蜜蜜|约会|思念|想念|思)/, colors: ['海棠红','桃红','藕荷','绯红','丁香','芍药','雪青','银朱'], label: '浪漫甜蜜' },
+  // 孤独、思考
+  { re: /(孤独|寂寞|独处|思考|深思|反省|沉淀|内省|独白|一个人|沉思|冥想|独自|孤|独)/, colors: ['藏蓝','玄青','靛青','墨色','鸦青','乌黑','深蓝','檀色'], label: '孤独哲思' },
+  // 复古、怀旧
+  { re: /(怀旧|复古|古风|回忆|往事|旧时光|故|旧|老|曾经|岁月|时光|过往)/, colors: ['赭红','绛紫','檀色','栗色','赭石','棕褐','酱色','鎏金'], label: '复古怀旧' },
+  // 神秘、梦幻
+  { re: /(神秘|梦幻|迷离|朦胧|梦境|虚幻|空灵|幻想|奇幻|魔法|星空|宇宙|星辰|银河|夜)/, colors: ['黛紫','琉璃','青莲','秘色','靛蓝','深蓝','宝蓝','紫棠'], label: '神秘梦幻' },
+  // 秋天、成熟
+  { re: /(秋天|秋日|成熟|收获|岁|秋|落叶|金黄|枫|橙)/, colors: ['橘红','赭石','枫叶','秋香','檀色','琥珀','柿色','褐'], label: '秋日私语' },
+];
+
+// 从 COLORS 中按名称查找颜色
+function findColorByName(name) {
+  return COLORS.find(function(c) { return c.name === name; }) || COLORS.find(function(c) { return c.name.indexOf(name) !== -1; });
+}
+
+// 解析心情文字
+function analyzeMood(text) {
+  var hits = [];
+  for (var i = 0; i < MOOD_MAP.length; i++) {
+    var m = MOOD_MAP[i];
+    if (m.re.test(text)) {
+      hits.push(m);
+    }
+  }
+  return hits;
+}
+
+// 从匹配中选出 5 种颜色
+function pickMoodColors(hits) {
+  var pool = [];
+  var used = {};
+
+  // 优先从每个匹配中取前几个
+  for (var h = 0; h < hits.length; h++) {
+    for (var i = 0; i < hits[h].colors.length && pool.length < 8; i++) {
+      var name = hits[h].colors[i];
+      if (!used[name]) {
+        var c = findColorByName(name);
+        if (c) { pool.push(c); used[name] = true; }
+      }
+    }
+  }
+
+  // 不够则从各类补
+  if (pool.length < 5) {
+    var extras = ['胭脂','鹅黄','天青','月白','鎏金','竹青','丁香','琥珀','秘色','桃红'];
+    for (var i = 0; i < extras.length && pool.length < 5; i++) {
+      if (!used[extras[i]]) {
+        var c = findColorByName(extras[i]);
+        if (c) { pool.push(c); used[extras[i]] = true; }
+      }
+    }
+  }
+
+  // 多样性洗牌：优先选不同色系
+  pool.sort(function(a, b) { return (a.cat || '').localeCompare(b.cat || ''); });
+
+  // 从排序后的池中尽量选不同类
+  var result = [];
+  var catsUsed = {};
+  for (var i = 0; i < pool.length && result.length < 5; i++) {
+    if (!catsUsed[pool[i].cat] || result.length >= 3) {
+      result.push(pool[i]);
+      catsUsed[pool[i].cat] = true;
+    }
+  }
+
+  return result.slice(0, 5);
+}
+
+function searchMood() {
+  var text = document.getElementById('moodInput').value.trim();
+  if (!text || text.length < 2) {
+    showToast('多写几个字描述一下心情吧 ✨');
+    return;
+  }
+
+  var hits = analyzeMood(text);
+
+  // 没匹配到也给出默认配色
+  if (hits.length === 0) {
+    hits = [MOOD_MAP[2], MOOD_MAP[3]]; // 默认 快乐+温暖
+  }
+
+  var colors = pickMoodColors(hits);
+  var label = hits.map(function(h) { return h.label; }).slice(0, 2).join(' · ');
+
+  showMoodResult(colors, label, text);
+}
+
+function showMoodResult(colors, label, originalText) {
+  var card = document.getElementById('moodResultCard');
+  card.innerHTML = [
+    '<button class="mood-close-btn" onclick="closeMoodResult()">✕</button>',
+    '<div class="mood-label">根据你的心情 · ' + label + '</div>',
+    '<div class="mood-title">专属配色方案</div>',
+    '<div class="mood-swatches">',
+    colors.map(function(c) {
+      return '<div class="mood-swatch">' +
+        '<div class="swatch-dot" style="background:' + c.hex + ';--swatch-glow:rgba(' + c.r + ',' + c.g + ',' + c.b + ',0.4)" onclick="copyValue(\'' + c.hex + '\', this)" title="点击复制色值"></div>' +
+        '<div class="swatch-name">' + c.name + '</div>' +
+        '<div class="swatch-hex">' + c.hex + '</div>' +
+      '</div>';
+    }).join(''),
+    '</div>',
+    '<div class="mood-result-actions">',
+      '<button class="btn btn-secondary" onclick="addMoodToPalette()">🎨 加入配色</button>',
+      '<button class="btn btn-primary" onclick="exportMoodPalette()">💾 导出图片</button>',
+      '<button class="btn btn-secondary" onclick="shareMoodResult()">📤 分享</button>',
+    '</div>',
+  ].join('');
+
+  // 存到全局供后续操作
+  window._moodColors = colors;
+  window._moodLabel = label;
+
+  document.getElementById('mood-result-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMoodResult() {
+  document.getElementById('mood-result-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function addMoodToPalette() {
+  if (!window._moodColors) return;
+  for (var i = 0; i < window._moodColors.length && palette.length < 5; i++) {
+    if (!palette.some(function(p) { return p.name === window._moodColors[i].name; })) {
+      palette.push(window._moodColors[i]);
+    }
+  }
+  updatePaletteBar();
+  showToast('已加入配色方案 🎨');
+  closeMoodResult();
+}
+
+function exportMoodPalette() {
+  if (!window._moodColors) return;
+  // 临时设置 palette 为心情配色，导出后恢复
+  var saved = palette.slice();
+  palette = window._moodColors.slice();
+  exportPalette();
+  palette = saved;
+}
+
+function shareMoodResult() {
+  if (!window._moodColors) return;
+  var text = '💭 我的心情配色方案\n' +
+    window._moodColors.map(function(c) { return c.name + ' ' + c.hex; }).join(' │ ') +
+    '\n—— 来自 寻色 ' + window.location.href;
+  if (navigator.share) {
+    navigator.share({ title: '我的心情配色', text: text }).catch(function(){});
+  } else {
+    copyValue(text, null);
+    showToast('已复制配色方案，分享给朋友吧 ✨');
+  }
+}
+
+// 心情输入框回车触发
+document.addEventListener('DOMContentLoaded', function() {
+  var mi = document.getElementById('moodInput');
+  if (mi) mi.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); searchMood(); }
+  });
+});
 
 // 预加载姓名色卡背景图
 (new Image()).src = 'assets/11.jpg';
