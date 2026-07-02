@@ -1126,6 +1126,12 @@ function searchName() {
 }
 
 function showNameResult(c) {
+  // 每次显示时确保背景图加载
+  var result = document.getElementById('name-result');
+  result.style.backgroundImage = 'url(assets/11.jpg)';
+  result.style.backgroundSize = 'cover';
+  result.style.backgroundPosition = 'center';
+
   var card = document.getElementById('embroideryCard');
   card.style.setProperty('--ink-color', c.hex);
   card.style.setProperty('--ink-glow', 'rgba('+c.r+','+c.g+','+c.b+',0.35)');
@@ -1174,6 +1180,9 @@ function retryName() {
   document.getElementById('nameInput').value = '';
   document.getElementById('nameInput').focus();
 }
+
+// 预加载姓名色卡背景图
+(new Image()).src = 'assets/11.jpg';
 
 // 姓名输入框回车触发
 document.addEventListener('DOMContentLoaded', function() {
