@@ -233,14 +233,6 @@ body {
   text-align: center;
   padding: 60px 0 80px;
   position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-/* 让内容浮在背景上 */
-#name-result > * {
-  position: relative;
-  z-index: 2;
 }
 
 #name-result.visible {
@@ -248,7 +240,30 @@ body {
   animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
 }
 
-@keyframes fadeInUp {
+/* 浮窗卡片：半透明暗底玻璃态 */
+.name-float-card {
+  display: inline-block;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px 28px;
+  margin-bottom: 20px;
+  max-width: 460px;
+}
+
+.name-result-poem {
+  max-width: 460px;
+  margin: 0 auto 24px;
+  padding: 20px 24px;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  border-left: 2px solid rgba(201,169,110,0.3);
+}
   from { opacity: 0; transform: translateY(30px); }
   to   { opacity: 1; transform: translateY(0); }
 }
@@ -309,16 +324,6 @@ body {
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.name-result-poem {
-  max-width: 420px;
-  margin: 0 auto 24px;
-  padding: 20px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 12px;
-  border-left: 2px solid rgba(201,169,110,0.3);
 }
 
 .name-result-poem .poem-line {
@@ -876,7 +881,7 @@ body {
 </head>
 <body>
 
-<img id="name-bg-img" src="assets/11.jpg" alt="" style="position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:0;display:none;">
+<img id="name-bg-img" src="assets/11-bg.jpg" alt="" style="position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:0;display:none;">
 
 <div id="galaxy-bg"></div>
 
@@ -911,8 +916,10 @@ body {
   <!-- 姓色匹配 > 结果区 -->
   <div id="name-result">
     <div class="embroidery-card" id="embroideryCard"></div>
-    <h2 class="name-result-name" id="nameColorName"></h2>
-    <div class="name-result-values" id="nameColorValues"></div>
+    <div class="name-float-card">
+      <h2 class="name-result-name" id="nameColorName"></h2>
+      <div class="name-result-values" id="nameColorValues"></div>
+    </div>
     <div class="name-result-poem">
       <div class="poem-line" id="namePoemText"></div>
       <div class="poem-attr" id="namePoemAttr"></div>
