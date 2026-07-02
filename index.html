@@ -1098,7 +1098,6 @@ function downloadPalette() {
 // ─── 打赏 / 分享 ─────────────────────────────────
 function showDonate() {
   closeModal();
-  // 创建打赏弹窗
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modal');
   modal.innerHTML = `
@@ -1106,13 +1105,13 @@ function showDonate() {
       <div style="font-size:48px; margin-bottom:16px;">☕</div>
       <h2 style="font-family:'ZCOOL QingKe HuangYou',serif; color:var(--gold); margin-bottom:8px;">感谢支持</h2>
       <p style="color:var(--text-secondary); line-height:1.8; margin-bottom:24px;">
-        160 种颜色，160 首诗<br>
+        92 种颜色，92 首诗<br>
         独立整理维护，持续更新中<br><br>
-        <strong>微信赞赏 ¥9.9</strong><br>
-        <span style="font-size:13px;color:var(--text-muted);">截图扫码即可</span>
+        <strong>长按识别二维码赞赏</strong><br>
+        <span style="font-size:13px;color:var(--text-muted);">金额随缘，心意到了就好</span>
       </p>
-      <div style="width:200px;height:200px;background:rgba(255,255,255,0.03);border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:13px;">
-        [赞赏码占位]
+      <div style="width:220px;height:220px;background:#fff;border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.3);">
+        <img src="assets/donate-qrcode.jpg" alt="微信赞赏码" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=padding:20px;color:#999;font-size:12px;text-align:center;>将微信赞赏码截图保存为<br><code>assets/donate-qrcode.jpg</code><br>即可替换此处</div>'" style="width:100%;height:100%;object-fit:contain;">
       </div>
       <p style="font-size:12px;color:var(--text-muted);">每一笔赞赏都会让我更有动力继续更新 ❤️</p>
       <button class="btn btn-secondary" onclick="closeModal()" style="margin-top:20px;padding:10px 32px;">先看看再说</button>
