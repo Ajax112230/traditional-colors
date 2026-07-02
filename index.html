@@ -225,7 +225,27 @@ body {
 #name-result {
   display: none;
   text-align: center;
-  padding: 0 0 48px;
+  padding: 60px 0 80px;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* 背景图 */
+#name-result::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('assets/11.jpg') center/cover no-repeat;
+  opacity: 0.45;
+  border-radius: 24px;
+}
+
+/* 让内容浮在背景上 */
+#name-result > * {
+  position: relative;
+  z-index: 2;
 }
 
 #name-result.visible {
@@ -341,6 +361,9 @@ body {
 @media (max-width: 480px) {
   .embroidery-card { width: 180px; height: 180px; }
   .name-result-name { font-size: 28px; }
+  #name-result { padding: 40px 0 60px; border-radius: 16px; }
+  #name-result::before,
+  #name-result::after { border-radius: 16px; }
 }
 
 /* ─── 分类筛选 ────────────────────────────────── */
